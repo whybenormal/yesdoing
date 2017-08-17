@@ -5,29 +5,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.yesdoing.dto.Member;
-import com.yesdoing.repository.MemberRepository;
+import com.yesdoing.dto.Account;
+import com.yesdoing.repository.AccountRepository;
 
 @Controller
-public class LoginContoller {
+public class AccountContoller {
+
 	@Autowired
-	MemberRepository memberRepository;
+	AccountRepository accountRepository;
+	
+	//로그인 페이지 이동
 	@GetMapping("/login")
 	public String login() {
 		return "login/login";
 	}
+	//회원가입 페이지 이동
 	@GetMapping("/join")
 	public String join() {
 		return "login/join";
 	}
+	//회원가입
 	@PostMapping("/join")
-	public String join(Member member) {
-		System.out.println(member);
-		System.out.println(member.getMemberId());
-		System.out.println(member.getName());
-		System.out.println(member.getPassword());
-		memberRepository.save(member);
-		System.out.println("저장완료");
+	public String join(Account account) {
+		accountRepository.save(account);
 		return "redirect:/login";
 	}
 }
